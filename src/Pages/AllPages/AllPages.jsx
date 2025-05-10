@@ -1,0 +1,18 @@
+import Login from "../Login/Login";
+import AddCourse from "../Courses Folder/AddCourse/AddCourse";
+import NotFound from "../NotFound/NotFound";
+import EditCourse from "../Courses Folder/EditCourse/EditCourse";
+import Orders from "../Orders Folder/Orders/Orders";
+import EditInstructor from "../Instructors Folder/EditInstructor/EditInstructor";
+import GetSections from "../Sections Folder/GetSections/GetSections";
+import EditSection from "../Sections Folder/EditSection/EditSection";
+import AddSection from "../Sections Folder/AddSection/AddSection";
+import Videos from "../Videos Folder/Videos/Videos";
+import EditVideo from "../Videos Folder/EditVideo/EditVideo";
+import AddVideo from "../Videos Folder/AddVideo/AddVideo";
+import OrderDetails from "../Orders Folder/OrderDetails/OrderDetails";
+import Users from "../Users/Users";
+import Instructors from "../Instructors Folder/Instructors/Instructors";
+import Courses from "../Courses Folder/Courses/Courses";
+import Home from "../Home/Home";
+export { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home };
