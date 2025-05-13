@@ -22,8 +22,7 @@ const AddVideo = () => {
         coverImage: "",
         video:""
     })
-        
-
+            
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);

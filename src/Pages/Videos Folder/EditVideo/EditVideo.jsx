@@ -19,22 +19,32 @@ const EditVideo = () => {
         name: "",
         description: "",
         duration: "",
+        order:"",
         sectionId: sectionId,
         coverImage: "",
-        video: ""
+        video: "",
     });
 
-    useEffect(() => { getVideoData() }, []);
+    useEffect(() => { getVideoData() }, [token]);
 
     async function getVideoData() {
+
         try {
-            const { data } = await axios.get(`https://brightminds.runasp.net/api/Video/${videoId}`);
+            const options = {
+                method:"GET",
+                url: `https://brightminds.runasp.net/api/Video/${videoId}`,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+            const { data } = await axios.request(options);
             const response = data.data;
             setVideoDetail({
                 ...videoDetail,
                 name: response.name,
                 description: response.description,
                 duration: response.duration,
+                order:response.order,
             });
         } catch (e) {
             console.log(e);
@@ -64,6 +74,7 @@ const EditVideo = () => {
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
+        
         try {
             const formData = new FormData();
             formData.append("Name", videoDetail.name);
@@ -72,6 +83,7 @@ const EditVideo = () => {
             formData.append("SectionId", videoDetail.sectionId);
             formData.append("CoverImage", videoDetail.coverImage);
             formData.append("Video", videoDetail.video);
+            formData.append("Order", videoDetail.order);
             const options = {
                 url: `https://brightminds.runasp.net/api/Video/${videoId}`,
                 method: "PUT",
