@@ -10,7 +10,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Instructor from "../../../Components/Instructor/Instructor";
 import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
 
@@ -21,10 +21,20 @@ const Instructors = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [Id, setId] = useState(null);
-    const [page, setPage] = useState(1);
+    const location = useLocation();
+    const initialPage = location.state?.pageNum || 1;
+    const [page, setPage] = useState(initialPage);
     const [numPages, setNumPages] = useState(null);
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
+
+    console.log(initialPage);
+
+    useEffect(() => {
+        if (location.state?.pageNum) {
+            navigate(location.pathname, { replace: true });
+        }
+    }, []);
 
     const handleClickOpen = (id) => {
         setOpen(true);
@@ -85,7 +95,7 @@ const Instructors = () => {
     }
 
     async function handleEdit(id) {
-        navigate(`/dashboard/instructors/edit/${id}`);
+        navigate(`/dashboard/instructors/edit/${id}`, {state:{pageNum:page}}); // !!!!!!!
     } 
 
     

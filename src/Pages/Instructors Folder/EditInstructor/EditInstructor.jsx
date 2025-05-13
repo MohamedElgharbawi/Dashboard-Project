@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
 import { Box, TextField, Button } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
@@ -15,6 +15,9 @@ const EditInstructor = () => {
     const { id } = useParams();
     const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const location = useLocation();
+    const pageNum = location.state.pageNum;
+    console.log(pageNum);
     const [instructorDetail, setInstructorDetail] = useState({
         qualifications: "",
         jobTitle: "",
@@ -52,7 +55,7 @@ const EditInstructor = () => {
                 }
             }
             await axios.request(options);
-            navigate("/dashboard/instructors");
+            navigate("/dashboard/instructors", {state:{pageNum:pageNum}});
             toast.success("Instructor Updated Successfully.");
         } catch(e) {
             console.log(e);
@@ -136,7 +139,7 @@ const EditInstructor = () => {
                             borderRadius: "6px",
                             minWidth: "120px",
                             }}
-                            onClick={() => navigate(-1)}
+                            onClick={() => navigate("/dashboard/instructors", {state:{pageNum:pageNum}})}
                         >
                             Cancel
                         </Button>
