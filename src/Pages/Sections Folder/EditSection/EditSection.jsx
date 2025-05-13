@@ -121,6 +121,16 @@ const EditSection = () => {
                         value={courseDetail.description}
                         onChange={e => setCourseDetail({...courseDetail, description:e.target.value})}
                     />
+                            
+                    <TextField
+                        label="Order"
+                        fullWidth
+                        type="text"
+                        name="order"
+                        sx={{ mb: 2 }}
+                        value={courseDetail.order}
+                        onChange={e => setCourseDetail({...courseDetail, order:e.target.value})}
+                    />
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
                         <Button
