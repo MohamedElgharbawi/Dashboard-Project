@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -58,7 +59,7 @@ const EditCourse = () => {
             }
             const { data } = await axios.request(options);
             navigate(-1);
-            toast.success(data.message);
+            toast.success("Course Updated Successfully.");
         } catch(e) {
             console.log(e.response.data.statusCode);
             if (e.response.data.statusCode === 403) {

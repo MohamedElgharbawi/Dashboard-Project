@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
@@ -36,7 +37,7 @@ const AddSection = () => {
             }
             const { data } = await axios.request(options);
             navigate(-1);
-            toast.success(data.message);
+            toast.success("Section Added Successfully.");
         } catch (e) {
             console.log(e);
             if(e.response.data.statusCode === 400)

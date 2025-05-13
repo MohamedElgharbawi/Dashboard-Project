@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
@@ -44,7 +45,7 @@ const AddVideo = () => {
             }
             const { data } = await axios.request(options);
             navigate(-1);
-            toast.success(data.message);
+            toast.success("Video Added Successfully.");
         } catch(e) {
             console.log(e);
             if(e.response.data.statusCode === 400)

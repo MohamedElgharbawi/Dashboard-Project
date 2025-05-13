@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -67,7 +68,7 @@ const EditSection = () => {
             }
             const { data } = await axios.request(options);
             navigate(-1);
-            toast.success(data.message);
+            toast.success("Section Updated Successfully.");
         } catch (e) {
             console.log(e);
             if(e.response.data.statusCode === 400)

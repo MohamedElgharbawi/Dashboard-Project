@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
@@ -57,7 +58,7 @@ const AddCourse = () => {
             }
             const { data } = await axios.request(options);
             navigate("/dashboard/courses");
-            toast.success(data.message);
+            toast.success("Course Added Successfully.");
         } catch(e) {
             console.log(e);
             toast.error("You Must Enter Valid Values.");

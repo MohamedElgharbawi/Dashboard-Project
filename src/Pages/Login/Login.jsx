@@ -46,6 +46,7 @@ const Login = () => {
             handleClick();
             try {
                 const response = await axios.post("https://brightminds.runasp.net/api/Account/login", values);
+                console.log(response);
                 const { data } = response;
                 if (response.status === 200 && data?.user && data?.token) {
                     console.log(data.token);

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -61,7 +62,7 @@ const GetSections = () => {
             const { data } = await axios.request(options);
             setSections(prev => prev.filter(section => section.id !== selectedSectionId));
             handleClose();
-            toast.success(data.message);
+            toast.success("Section Deleted Successfully.");
         } catch (e) {
             console.log(e);
         }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -66,7 +67,7 @@ const Courses = () => {
             const { data } = await axios.request(options);
             const updatedCourses = courses.filter(course => course.id !== id);
             setCourses(updatedCourses);
-            toast.success(data.message);
+            toast.success("Course Deleted Successfully.");
             if (courses.length === 1) {
                 if (page !== 1 && numPages !== 1) {
                     setNumPages(numPages - 1);
