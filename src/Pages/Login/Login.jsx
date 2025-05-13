@@ -14,12 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 const Login = () => {
 
     const [loading, setLoading] = useState(false);
-    function handleClick() {
-        setLoading(true);
-    }
-
     const [isLoading, setIsLoading] = useState(true);
-
     const { setAdmin, setToken } = useAdmin();
     const navigate = useNavigate();
 
@@ -43,11 +38,12 @@ const Login = () => {
         },
         validationSchema: validation,
         onSubmit: async (values) => {
-            handleClick();
+            setLoading(true);
             try {
                 const response = await axios.post("https://brightminds.runasp.net/api/Account/login", values);
                 console.log(response);
                 const { data } = response;
+                console.log(data);
                 if (response.status === 200 && data?.user && data?.token) {
                     console.log(data.token);
                     setAdmin(data.user.displayName);
