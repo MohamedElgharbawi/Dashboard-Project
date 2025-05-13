@@ -63,10 +63,10 @@ const Courses = () => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-            await axios.request(options);
+            const { data } = await axios.request(options);
             const updatedCourses = courses.filter(course => course.id !== id);
             setCourses(updatedCourses);
-            toast.success("Course Deleted Successfully.");
+            toast.success(data.message);
             if (courses.length === 1) {
                 if (page !== 1 && numPages !== 1) {
                     setNumPages(numPages - 1);

@@ -24,7 +24,7 @@ const AddCourse = () => {
 
     async function getCategory() {
         try {
-            await axios.get("https://brightminds.runasp.net/api/Category").then(response => response.data).then(response => {
+                await axios.get("https://brightminds.runasp.net/api/Category").then(response => response.data).then(response => {
                 const { data } = response;
                 setDataCateg(data);
             })
@@ -55,9 +55,9 @@ const AddCourse = () => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-            await axios.request(options);
+            const { data } = await axios.request(options);
             navigate("/dashboard/courses");
-            toast.success("Course Added Successfully.");
+            toast.success(data.message);
         } catch(e) {
             console.log(e);
             toast.error("You Must Enter Valid Values.");

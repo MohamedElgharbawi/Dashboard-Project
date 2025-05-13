@@ -34,9 +34,9 @@ const AddSection = () => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-            await axios.request(options);
+            const { data } = await axios.request(options);
             navigate(-1);
-            toast.success("Section Added Successfully.");
+            toast.success(data.message);
         } catch (e) {
             console.log(e);
             if(e.response.data.statusCode === 400)

@@ -65,9 +65,9 @@ const EditSection = () => {
                 },
                 data:courseDetail
             }
-            await axios.request(options);
+            const { data } = await axios.request(options);
             navigate(-1);
-            toast.success("Section Updated Successfully.");
+            toast.success(data.message);
         } catch (e) {
             console.log(e);
             if(e.response.data.statusCode === 400)

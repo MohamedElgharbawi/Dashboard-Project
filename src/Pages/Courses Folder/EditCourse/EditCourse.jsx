@@ -56,9 +56,9 @@ const EditCourse = () => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-            await axios.request(options);
+            const { data } = await axios.request(options);
             navigate(-1);
-            toast.success("Course Updated Successfully.");
+            toast.success(data.message);
         } catch(e) {
             console.log(e.response.data.statusCode);
             if (e.response.data.statusCode === 403) {

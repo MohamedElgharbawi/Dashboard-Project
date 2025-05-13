@@ -58,10 +58,10 @@ const GetSections = () => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-            await axios.request(options);
+            const { data } = await axios.request(options);
             setSections(prev => prev.filter(section => section.id !== selectedSectionId));
             handleClose();
-            toast.success("Section Deleted Successfully.");
+            toast.success(data.message);
         } catch (e) {
             console.log(e);
         }
