@@ -15,8 +15,6 @@ const Video = ({ video, onDeleteClick }) => {
         setShowFullText(!showFullText);
     };
 
-
-
     async function handleEditCourse(videoId) {
         navigate(`/dashboard/courses/${id}/section/${video.sectionId}/videos/${videoId}/edit`);
     }

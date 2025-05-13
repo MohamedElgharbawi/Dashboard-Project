@@ -30,7 +30,6 @@ const EditVideo = () => {
         try {
             const { data } = await axios.get(`https://brightminds.runasp.net/api/Video/${videoId}`);
             const response = data.data;
-            console.log(response);
             setVideoDetail({
                 ...videoDetail,
                 name: response.name,
