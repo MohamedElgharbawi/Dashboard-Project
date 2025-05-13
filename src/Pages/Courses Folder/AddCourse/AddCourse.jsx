@@ -3,18 +3,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
 import { InputLabel, Select, MenuItem , Box, TextField, Button, FormControl, FormLabel} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
-
 const AddCourse = () => {
     const navigate = useNavigate();
     const [dataCatge, setDataCateg] = useState([]);
     const { token } = useAdmin();
     const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const location = useLocation();
+    const { pageNum } = location.state;
     const [dataObj, setDataObj] = useState({
         categoryId: "",
         name: "",
@@ -57,7 +58,7 @@ const AddCourse = () => {
                 }
             }
             const { data } = await axios.request(options);
-            navigate("/dashboard/courses");
+            navigate("/dashboard/courses", { state: { pageNum:pageNum}});
             toast.success("Course Added Successfully.");
         } catch(e) {
             console.log(e);
@@ -206,7 +207,7 @@ const AddCourse = () => {
                         borderRadius: "6px",
                         minWidth: "120px",
                         }}
-                        onClick={() => navigate(-1)}
+                        onClick={() => navigate("/dashboard/courses", { state: { pageNum:pageNum}})}
                     >
                         Cancel
                     </Button>

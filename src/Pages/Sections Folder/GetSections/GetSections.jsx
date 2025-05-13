@@ -26,6 +26,7 @@ const GetSections = () => {
     const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
     const courseId = location.state?.id;
+    const pageNum = location.state?.pageNum;
 
     const getSections = async () => {
         try {
@@ -96,14 +97,14 @@ const GetSections = () => {
                     </div>
                     <div className="flex items-center flex-col gap-2" style={{ marginTop:"20px" }}>
                         <Button onClick={handleAdd} variant="contained" color="primary" type="button" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" },width:"100%"}}>Add Section</Button>
-                        <Button variant="contained" color="error" type="button" sx={{ textTransform: "none", px: 4, py: 1.5, fontWeight: "bold", fontSize: "16px", borderRadius: "6px", minWidth: "120px",width:"100%" }}onClick={() => navigate(-1)}>Back</Button>
+                        <Button variant="contained" color="error" type="button" sx={{ textTransform: "none", px: 4, py: 1.5, fontWeight: "bold", fontSize: "16px", borderRadius: "6px", minWidth: "120px",width:"100%" }}onClick={() => navigate("/dashboard/courses", { state: { pageNum:pageNum}})}>Back</Button>
                     </div>
                 </div>
             ) : <div className="flex justify-center items-center h-full text-white font-bold flex-col gap-5" style={{ fontSize: "28px" }}>
                     <p>No Sections Founded</p>
                     <div className="flex items-center gap-2">
                         <Button onClick={handleAdd} variant="contained" color="primary" type="button" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }}}>Add Section</Button>
-                        <Button variant="contained" color="error" type="button" sx={{ textTransform: "none", px: 4, py: 1.5, fontWeight: "bold", fontSize: "16px", borderRadius: "6px", minWidth: "120px" }}onClick={() => navigate(-1)}>Back</Button>
+                        <Button variant="contained" color="error" type="button" sx={{ textTransform: "none", px: 4, py: 1.5, fontWeight: "bold", fontSize: "16px", borderRadius: "6px", minWidth: "120px" }}onClick={() => navigate("/dashboard/courses", { state: { pageNum:pageNum}})}>Back</Button>
                     </div>
                 </div>}
             <Dialog open={open} onClose={handleClose}>

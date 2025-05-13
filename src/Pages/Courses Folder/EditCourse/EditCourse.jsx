@@ -17,6 +17,7 @@ const EditCourse = () => {
     const {id} = useParams();
     const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const pageNum = location.state?.pageNum;
     const [courseDetail, setCourseDetail] = useState({
         name: "",
         description: "",
@@ -58,7 +59,7 @@ const EditCourse = () => {
                 }
             }
             const { data } = await axios.request(options);
-            navigate(-1);
+            navigate("/dashboard/courses", { state: { pageNum:pageNum}});
             toast.success("Course Updated Successfully.");
         } catch(e) {
             console.log(e.response.data.statusCode);
@@ -188,7 +189,7 @@ const EditCourse = () => {
                         borderRadius: "6px",
                         minWidth: "120px",
                         }}
-                        onClick={() => navigate(-1)}
+                        onClick={() => navigate("/dashboard/courses", { state: { pageNum:pageNum}})}
                     >
                         Cancel
                     </Button>

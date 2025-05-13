@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
 import CircularProgress from '@mui/material/CircularProgress';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -17,16 +17,24 @@ import CheckConnection from "../../../Components/CheckConnection/CheckConnection
 
 const Courses = () => {
 
+    const location = useLocation();
     const [courses, setCourses] = useState([]);
     const { token } = useAdmin();
     const [open, setOpen] = useState(false);
     const [Id, setId] = useState(null);
     const navigate = useNavigate();
-    const [page, setPage] = useState(1);
+    const initialPage = location.state?.pageNum || 1;
+    const [page, setPage] = useState(initialPage);
     const [numPages, setNumPages] = useState(null);
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
 
+    useEffect(() => {
+        if (location.state?.pageNum) {
+            navigate(location.pathname, { replace: true });
+    }
+    }, []);
+    
     async function getCourses() {
         try {
             const { data } = await axios.get("https://brightminds.runasp.net/api/Course");
@@ -92,13 +100,13 @@ const Courses = () => {
 
     async function handleEdit(id, categoryId) {
         navigate(`/dashboard/courses/edit/${id}`, {
-            state: { categoryId }
+            state: { categoryId, pageNum:page }
         });
     }
 
     async function handleSections(id) {
         navigate(`/dashboard/courses/${id}/sections`, {
-            state:{id}
+            state:{id, pageNum:page}
         });
     }
 
@@ -174,7 +182,7 @@ const Courses = () => {
                                             <span style={{ opacity: page - 1 ? 1 : .3, pointerEvents: page - 1 ? "auto" : "none" }} onClick={() => {
                                                 setPage(page - 1);
                                             }}><i className="fa-solid fa-arrow-left"></i></span>
-                                            <Link to={"/dashboard/courses/add"} style={{ flexGrow: "1" }}><Button variant="contained" color="primary" type="submit" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Course</Button></Link>
+                                            <Button onClick={() => navigate("/dashboard/courses/add", {state:{pageNum:page}})} variant="contained" color="primary" type="submit" sx={{ flexGrow: "1", textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Course</Button>
                                             <span style={{ opacity: page !== numPages ? 1 : .3, pointerEvents: page !== numPages ? "auto" : "none" }} onClick={() => {
                                                 setPage(page + 1);
                                             }}><i className="fa-solid fa-arrow-right"></i></span>
