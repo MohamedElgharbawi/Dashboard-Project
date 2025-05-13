@@ -3,20 +3,28 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
 
 const Orders = () => {
     
     const [orders, setOrders] = useState([]);
-    const [page, setPage] = useState(1);
     const [numPages, setNumPages] = useState(null);
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+    const initialPage = location.state?.pageNum || 1;
+    const [page, setPage] = useState(initialPage);
+
+    useEffect(() => {
+        if (location.state?.pageNum) {
+            navigate(location.pathname, { replace: true });
+        }
+    }, []);
 
     function handleGetOrder(id) {
-        navigate(`/dashboard/orders/${id}`);
+        navigate(`/dashboard/orders/${id}`, {state:{pageNum:page}});
     }
 
     async function getOrders() {

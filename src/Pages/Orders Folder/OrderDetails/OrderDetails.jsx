@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -15,6 +15,8 @@ const OrderDetails = () => {
     const [time, setTime] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+    const pageNum = location.state.pageNum;
 
     async function getOrder() {
         try {
@@ -85,7 +87,7 @@ const OrderDetails = () => {
                             )
                         })}
                     </div>
-                    <Button onClick={() => navigate(-1)} variant="contained" color="primary" type="submit" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width:"100%", marginTop:"20px"}}>Back</Button>
+                    <Button onClick={() => navigate("/dashboard/orders", { state: {pageNum:pageNum}})} variant="contained" color="primary" type="submit" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width:"100%", marginTop:"20px"}}>Back</Button>
                 </div>
             }
         </CheckConnection>

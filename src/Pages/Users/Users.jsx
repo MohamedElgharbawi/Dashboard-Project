@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { Box, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import CheckConnection from "../../Components/CheckConnection/CheckConnection";
+
 const Users = () => {
 
     const { token } = useAdmin();
@@ -50,7 +51,7 @@ const Users = () => {
                 qualifications: "",
                 jobTitle:""
             })
-            getUsers();
+            search ? fetchData() : getUsers();
             toast.success("The User Is Upgraded Successfully.");
         } catch (e) {
             console.log(e);
@@ -59,8 +60,6 @@ const Users = () => {
             setLoading(false);
         }
         setShow(false);
-        setSearch("");
-        setPage(1);
     }
 
 
