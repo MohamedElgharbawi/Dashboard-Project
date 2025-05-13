@@ -245,6 +245,7 @@ const EditVideo = () => {
 
                         <Button
                             variant="contained"
+                            disabled={loading}
                             color="error"
                             type="button"
                             sx={{

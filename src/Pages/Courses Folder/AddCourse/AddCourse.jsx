@@ -193,6 +193,7 @@ const AddCourse = () => {
                     </Button>
 
                     <Button
+                        disabled={loading}
                         variant="contained"
                         color="error"
                         type="button"
