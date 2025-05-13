@@ -48,7 +48,8 @@ const EditVideo = () => {
             });
         } catch (e) {
             console.log(e);
-            toast.error("Failed to load video data.");
+            if(token)
+                toast.error("Failed to load video data.");
         } finally {
             setIsLoading(false);
         }
@@ -117,7 +118,7 @@ const EditVideo = () => {
                     sx={{
                         width: { xs: "90%", sm: "400px" },
                         border: "1px solid #1976d2",
-                        padding: "70px 30px",
+                        padding: "30px 40px",
                         borderRadius: "10px",
                         boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
                         background: "#fff"
@@ -151,6 +152,16 @@ const EditVideo = () => {
                         sx={{ mb: 2 }}
                         value={videoDetail.duration}
                         onChange={e => setVideoDetail({ ...videoDetail, duration: e.target.value })}
+                    />
+                        
+                    <TextField
+                        label="Order"
+                        fullWidth
+                        type="text"
+                        name="order"
+                        sx={{ mb: 2 }}
+                        value={videoDetail.order}
+                        onChange={e => setVideoDetail({ ...videoDetail, order: e.target.value })}
                     />
 
                     <FormControl fullWidth sx={{ mb: 2 }}>
