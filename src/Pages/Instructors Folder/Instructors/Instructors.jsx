@@ -13,6 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate, useLocation } from "react-router-dom";
 import Instructor from "../../../Components/Instructor/Instructor";
 import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
+import { toast } from "react-toastify";
 
 const Instructors = () => {
 
@@ -88,14 +89,16 @@ const Instructors = () => {
                     setNumPages(0);
                 }
             }
+            toast.success("Instructor Deleted Successfully.");
         } catch (e) {
             console.log(e);
+            toast.error("Instructor Deletion Is Not Allowed.");
         }
         handleClose();
     }
 
     async function handleEdit(id) {
-        navigate(`/dashboard/instructors/edit/${id}`, {state:{pageNum:page}}); // !!!!!!!
+        navigate(`/dashboard/instructors/edit/${id}`, {state:{pageNum:page}});
     } 
 
     

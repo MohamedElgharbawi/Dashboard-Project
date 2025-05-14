@@ -13,6 +13,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
+import { toast } from "react-toastify";
+
 const Videos = () => {
   const { id, sectionId } = useParams();
   const [videos, setVideos] = useState([]);
@@ -51,6 +53,7 @@ const Videos = () => {
       await axios.request(options);
       setVideos((prev) => prev.filter((video) => video.id !== selectedVideoId));
       handleClose();
+      toast.success("Video Deleted Successfully.");
     } catch (e) {
       console.log(e);
     }
