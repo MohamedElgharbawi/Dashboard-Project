@@ -14,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
+// import Skeleton from '@mui/material/Skeleton';
 
 const Courses = () => {
 
@@ -37,6 +38,7 @@ const Courses = () => {
     
     async function getCourses() {
         try {
+            // setLoading(true);
             const { data } = await axios.get("https://brightminds.runasp.net/api/Course");
             setNumPages(Math.ceil(data.data.count / data.data.pageSize));
             if (data.data.count)
@@ -187,7 +189,7 @@ const Courses = () => {
                                                 setPage(page + 1);
                                             }}><i className="fa-solid fa-arrow-right"></i></span>
                                         </div>
-                                    </>
+                                    </> 
                                 )}
                                 <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
                                     <DialogTitle id="alert-dialog-title">
