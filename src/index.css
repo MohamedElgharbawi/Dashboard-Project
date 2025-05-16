@@ -16,6 +16,14 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+div.react-player__shadow {
+    background-color: rgba(255, 0, 0, .7) !important;
+    transition: all .3s;
+    &:hover {
+        background-color: rgba(255, 0, 0, .5) !important;
+    }
+}
+
 main > div.overflow-auto {
     max-width: calc(100vw - 250px);
 }
