@@ -207,7 +207,7 @@ const Users = () => {
                                                 <td>{user.displayName}</td>
                                                 <td>{user.email}</td>
                                                 <td>{user.roles[0] ?? "user"}</td>
-                                                <td className={`${user.roles[0] === "Admin" || user.roles[0] === "Instructor" ? "cursor-auto" : "cursor-pointer"}`} onClick={() => handleMakeInstructor(user)}><p className={user.roles[0] !== "Admin" && user.roles[0] !== "Instructor" ? "text-white" : ""}>{user.roles[0] === "Admin" || user.roles[0] === "Instructor" ? `Already ${user.roles[0]}` : `Upgrade`}</p></td>
+                                                <td className={`font-bold ${user.roles[0] === "Admin" || user.roles[0] === "Instructor" ? "cursor-auto" : "cursor-pointer"}`} onClick={() => handleMakeInstructor(user)}><p className={user.roles[0] !== "Admin" && user.roles[0] !== "Instructor" ? "text-white" : ""}>{user.roles[0] === "Admin" || user.roles[0] === "Instructor" ? `Already ${user.roles[0]}` : `Upgrade`}</p></td>
                                             </tr>
                                         )
                                     })}
