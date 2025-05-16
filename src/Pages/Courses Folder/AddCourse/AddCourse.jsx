@@ -21,9 +21,8 @@ const AddCourse = () => {
         name: "",
         description: "",
         image: "",
-        price:""
-    })
-
+        price: ""
+    });
     async function getCategory() {
         try {
                 await axios.get("https://brightminds.runasp.net/api/Category").then(response => response.data).then(response => {
