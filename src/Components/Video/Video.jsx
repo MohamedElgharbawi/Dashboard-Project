@@ -45,6 +45,10 @@ const Video = ({ video, onDeleteClick }) => {
         navigate(`/dashboard/courses/${id}/section/${video.sectionId}/videos/${videoId}/edit`);
     }
 
+    async function handleQuestions(videoId) {
+        navigate(`/dashboard/courses/${id}/section/${video.sectionId}/videos/${videoId}/questions`);
+    }
+
     return (
         <div
             className='flex flex-col justify-between bg-white rounded-sm gap-2.5'
@@ -98,6 +102,15 @@ const Video = ({ video, onDeleteClick }) => {
             </div>
 
             <div className='flex gap-1 flex-wrap'>
+                <Button
+                    size="small"
+                    variant="contained"
+                    color="success"
+                    className='capitalize'
+                    onClick={() => handleQuestions(video.id)}
+                >
+                    Questions
+                </Button>
                 <Button
                     size="small"
                     variant="contained"

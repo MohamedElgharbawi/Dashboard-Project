@@ -2,9 +2,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useAdmin } from "../../../Components/Context/UserProvider";
+import { useAdmin } from "../../Components/Context/UserProvider";
 import CircularProgress from '@mui/material/CircularProgress';
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,13 +13,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
-import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
-// import Skeleton from '@mui/material/Skeleton';
+import CheckConnection from "../../Components/CheckConnection/CheckConnection";
 
-const Courses = () => {
+const Questions = () => {
 
+    const { videoId } = useParams();
     const location = useLocation();
-    const [courses, setCourses] = useState([]);
+    const [questions, setQuestions] = useState([]);
     const { token } = useAdmin();
     const [open, setOpen] = useState(false);
     const [Id, setId] = useState(null);
@@ -33,15 +33,15 @@ const Courses = () => {
     useEffect(() => {
         if (location.state?.pageNum) {
             navigate(location.pathname, { replace: true });
-    }
+        }
     }, []);
     
-    async function getCourses() {
+    async function getQuestions() {
         try {
-            const { data } = await axios.get("https://brightminds.runasp.net/api/Course");
+            const { data } = await axios.get("https://brightminds.runasp.net/api/Questions");
             setNumPages(Math.ceil(data.data.count / data.data.pageSize));
             if (data.data.count)
-                await axios.get(`https://brightminds.runasp.net/api/Course?pageIndex=${page}&pageSize=${data.data.pageSize}`).then(response => response.data).then(data => setCourses(data.data.items));
+                await axios.get(`https://brightminds.runasp.net/api/Questions?PageIndex=${page}&PageSize=${data.data.pageSize}&VideoId=${211}`).then(response => response.data).then(data => setQuestions(data.data.items));
         } catch (e) {
             console.log(e);
         } finally {
@@ -51,7 +51,7 @@ const Courses = () => {
     }
 
     useEffect(() => {
-            getCourses();
+            getQuestions();
     }, [page]);
 
     const handleClickOpen = (id) => {
@@ -67,23 +67,23 @@ const Courses = () => {
     async function handleDelete(id) {
         try {
             const options = {
-                url: `https://brightminds.runasp.net/api/Course/${id}`,
+                url: `https://brightminds.runasp.net/api/Questions/${id}`,
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
             }
             const { data } = await axios.request(options);
-            const updatedCourses = courses.filter(course => course.id !== id);
-            setCourses(updatedCourses);
-            toast.success("Course Deleted Successfully.");
-            if (courses.length === 1) {
+            const updatedQuestions = questions.filter(question => question.id !== id);
+            setQuestions(updatedQuestions);
+            toast.success("Question Deleted Successfully.");
+            if (questions.length === 1) {
                 if (page !== 1 && numPages !== 1) {
                     setNumPages(numPages - 1);
                     setPage(page - 1);
                 } else if(page === 1 && numPages !== 1) {
                     setPage(1);
-                    getCourses();
+                    getQuestions();
                 }
                 else if (page === 1 && numPages === 1) {
                     setPage(0);
@@ -93,7 +93,7 @@ const Courses = () => {
         } catch (e) {
             console.log(e);
             if (e.response.data.statusCode === 403) {
-                toast.error("Course Deletion Is Not Allowed.");
+                toast.error("Question Deletion Is Not Allowed.");
             }
         }
         handleClose();
@@ -114,18 +114,18 @@ const Courses = () => {
     return (
         <CheckConnection>
             <Helmet>
-                <title>Courses</title>
+                <title>Questions</title>
             </Helmet>
                     {
-                        !courses.length && show ?
+                        !questions.length && show ?
                             <div>
-                                <h1 className="text-white text-3xl font-extrabold text-center">Courses</h1>
-                                <h2 className="text-center text-white font-bold" style={{ fontSize: "28px", marginBlock: "25px" }}>No Courses Founded</h2>
+                                <h1 className="text-white text-3xl font-extrabold text-center">Questions</h1>
+                                <h2 className="text-center text-white font-bold" style={{ fontSize: "28px", marginBlock: "25px" }}>No Questions Founded</h2>
                                 <div className="pagination">
                                     <span style={{ opacity: (page - 1 && page > 0) ? 1 : .3, pointerEvents: page - 1 ? "auto" : "none" }} onClick={() => {
                                         setPage(page - 1);
                                     }}><i className="fa-solid fa-arrow-left"></i></span>
-                                    <Link to={"/dashboard/courses/add"} style={{ flexGrow: "1" }}><Button variant="contained" color="primary" type="submit" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Course</Button></Link>
+                                    <Link to={"/dashboard/courses/add"} style={{ flexGrow: "1" }}><Button variant="contained" color="primary" type="submit" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Question</Button></Link>
                                     <span style={{ opacity: page !== numPages && numPages ? 1 : .3, pointerEvents: page !== numPages ? "auto" : "none" }} onClick={() => {
                                         setPage(page + 1);
                                     }}><i className="fa-solid fa-arrow-right"></i></span>
@@ -147,30 +147,21 @@ const Courses = () => {
                                                     <table className="w-full">
                                                         <thead>
                                                             <tr>
-                                                                <th>Course Number</th>
-                                                                <th>Course</th>
-                                                                <th>InstructorName</th>
-                                                                <th>Picture</th>
-                                                                <th>Price</th>
-                                                                <th>Rate</th>
-                                                                <th>Sections</th>
+                                                                <th>Question Image</th>
+                                                                <th>Question Number</th>
                                                                 <th>Edit</th>
                                                                 <th>Delete</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {courses.map((course, index) => {
+                                                        {questions.map((question, index) => {
+                                                            console.log(question);
                                                                 return (
-                                                                    <tr key={course.id}>
-                                                                        <td>{index + 1}</td>
-                                                                        <td>{course.name}</td>
-                                                                        <td>{course.instructorName}</td>
-                                                                        <td><img src={course.pictureUrl} alt={course.course} /></td>
-                                                                        <td>{course.price} $</td>
-                                                                        <td>{course.rate}</td>
-                                                                        <td className="fontawesome-icon" onClick={() => handleSections(course.id)}><i className="fa-solid fa-layer-group"></i></td>
-                                                                        <td className="fontawesome-icon" onClick={() => { handleEdit(course.id, course.categoryId) }}><i className="fa-solid fa-edit"></i></td>
-                                                                        <td className="fontawesome-icon" onClick={() => handleClickOpen(course.id)}><i className="fa-solid fa-trash" ></i></td>
+                                                                    <tr key={question.id}>
+                                                                        <td><img src={question.attachmentUrl} alt={question.title}/></td>
+                                                                        <td className="cursor-pointer question-number">Question Number { index + 1 }</td>
+                                                                        <td className="fontawesome-icon" onClick={() => { handleEdit(question.id, question.categoryId) }}><i className="fa-solid fa-edit"></i></td>
+                                                                        <td className="fontawesome-icon" onClick={() => handleClickOpen(question.id)}><i className="fa-solid fa-trash" ></i></td>
                                                                     </tr>
                                                                 )
                                                             })}
@@ -183,7 +174,7 @@ const Courses = () => {
                                             <span style={{ opacity: page - 1 ? 1 : .3, pointerEvents: page - 1 ? "auto" : "none" }} onClick={() => {
                                                 setPage(page - 1);
                                             }}><i className="fa-solid fa-arrow-left"></i></span>
-                                            <Button onClick={() => navigate("/dashboard/courses/add", {state:{pageNum:page}})} variant="contained" color="primary" type="submit" sx={{ flexGrow: "1", textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Course</Button>
+                                            <Button onClick={() => navigate("/dashboard/courses/add", {state:{pageNum:page}})} variant="contained" color="primary" type="submit" sx={{ flexGrow: "1", textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Question</Button>
                                             <span style={{ opacity: page !== numPages ? 1 : .3, pointerEvents: page !== numPages ? "auto" : "none" }} onClick={() => {
                                                 setPage(page + 1);
                                             }}><i className="fa-solid fa-arrow-right"></i></span>
@@ -192,7 +183,7 @@ const Courses = () => {
                                 )}
                                 <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
                                     <DialogTitle id="alert-dialog-title">
-                                        {"Are You Sure You Want To Delete This Course ?"}
+                                        {"Are You Sure You Want To Delete This Question ?"}
                                     </DialogTitle>
                                     <DialogContent>
                                         <DialogContentText id="alert-dialog-description">
@@ -210,4 +201,4 @@ const Courses = () => {
     )
 };
 
-export default Courses;
+export default Questions;
