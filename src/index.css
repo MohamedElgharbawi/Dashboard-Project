@@ -151,13 +151,6 @@ table img {
     font-weight: bold;
 }
 
-.question-number {
-    transition: all .3s;
-    &:hover {
-        color:#0f0;
-    }
-}
-
 .fontawesome-icon {
     cursor: pointer;
     &:hover i{
@@ -168,8 +161,7 @@ table img {
         &.fa-edit {
             color: #1976d2;
         }
-        &.fa-layer-group,
-        .question-number {
+        &.fa-layer-group {
             color:#0f0;
         }
     }

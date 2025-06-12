@@ -130,6 +130,24 @@ const Questions = () => {
                                         setPage(page + 1);
                                     }}><i className="fa-solid fa-arrow-right"></i></span>
                                 </div>
+                                <Button
+                                    variant="contained"
+                                    color="error"
+                                    sx={{
+                                        textTransform: "none",
+                                        px: 4,
+                                        py: 1.5,
+                                        fontWeight: "bold",
+                                        fontSize: "16px",
+                                        borderRadius: "6px",
+                                        minWidth: "120px",
+                                        width: "100%",
+                                        mt:1.2
+                                    }}
+                                    onClick={() => navigate(-1)}
+                                    >
+                                    Back
+                                </Button>
                             </div>
                             :
                             <>
@@ -159,7 +177,7 @@ const Questions = () => {
                                                                 return (
                                                                     <tr key={question.id}>
                                                                         <td><img src={question.attachmentUrl} alt={question.title}/></td>
-                                                                        <td className="cursor-pointer question-number">Question Number { index + 1 }</td>
+                                                                        <td>Question Number { index + 1 }</td>
                                                                         <td className="fontawesome-icon" onClick={() => { handleEdit(question.id, question.categoryId) }}><i className="fa-solid fa-edit"></i></td>
                                                                         <td className="fontawesome-icon" onClick={() => handleClickOpen(question.id)}><i className="fa-solid fa-trash" ></i></td>
                                                                     </tr>
@@ -179,6 +197,24 @@ const Questions = () => {
                                                 setPage(page + 1);
                                             }}><i className="fa-solid fa-arrow-right"></i></span>
                                         </div>
+                                        <Button
+                                            variant="contained"
+                                            color="error"
+                                            sx={{
+                                                textTransform: "none",
+                                                px: 4,
+                                                py: 1.5,
+                                                fontWeight: "bold",
+                                                fontSize: "16px",
+                                                borderRadius: "6px",
+                                                minWidth: "120px",
+                                                width: "100%",
+                                                mt:1.2
+                                            }}
+                                            onClick={() => navigate(-1)}
+                                            >
+                                            Back
+                                        </Button>
                                     </> 
                                 )}
                                 <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
