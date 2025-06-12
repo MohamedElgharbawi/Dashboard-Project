@@ -8,7 +8,7 @@ const Layout = () => {
             <Header />
             <div className="flex">
                 <Sidebar />
-                <div style={{padding:"20px", flexGrow:"1"}}>
+                <div style={{padding:"20px ", flexGrow:"1"}}>
                     <Outlet />
                 </div>
             </div>

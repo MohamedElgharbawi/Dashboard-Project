@@ -17,7 +17,10 @@ import CheckConnection from "../../Components/CheckConnection/CheckConnection";
 
 const Questions = () => {
 
-    const { videoId } = useParams();
+    // Edit & Add 
+
+    const { id, sectionId, videoId } = useParams();
+    console.log(id, sectionId, videoId);
     const location = useLocation();
     const [questions, setQuestions] = useState([]);
     const { token } = useAdmin();
@@ -99,15 +102,9 @@ const Questions = () => {
         handleClose();
     }
 
-    async function handleEdit(id, categoryId) {
-        navigate(`/dashboard/courses/edit/${id}`, {
-            state: { categoryId, pageNum:page }
-        });
-    }
-
-    async function handleSections(id) {
-        navigate(`/dashboard/courses/${id}/sections`, {
-            state:{id, pageNum:page}
+    async function handleEdit(questionId) {
+        navigate(`/dashboard/courses/${id}/section/${sectionId}/videos/${videoId}/question/${questionId}`, {
+            state: { videoId, questionId, pageNum:page }
         });
     }
 
@@ -157,8 +154,8 @@ const Questions = () => {
                                     </div>
                                 ) : (
                                     <>
-                                        <main className="flex flex-col gap-3.5" style={{ maxHeight: "calc(100vh - 192px)" }}>
-                                            <h1 className="text-white text-3xl font-extrabold text-center">Courses</h1>
+                                        <main className="flex flex-col gap-3.5" style={{ maxHeight: "calc(100vh - 244px)" }}>
+                                            <h1 className="text-white text-3xl font-extrabold text-center">Questions</h1>
                                             <div className="flex flex-col overflow-auto">
                                                 <div className="text-right w-full" style={{ top: "-24px" }}>{page} of {numPages}</div>
                                                 <div id="table" className="relative border-t border-b overflow-auto">
@@ -178,7 +175,7 @@ const Questions = () => {
                                                                     <tr key={question.id}>
                                                                         <td><img src={question.attachmentUrl} alt={question.title}/></td>
                                                                         <td>Question Number { index + 1 }</td>
-                                                                        <td className="fontawesome-icon" onClick={() => { handleEdit(question.id, question.categoryId) }}><i className="fa-solid fa-edit"></i></td>
+                                                                        <td className="fontawesome-icon" onClick={() => { handleEdit(question.id) }}><i className="fa-solid fa-edit"></i></td>
                                                                         <td className="fontawesome-icon" onClick={() => handleClickOpen(question.id)}><i className="fa-solid fa-trash" ></i></td>
                                                                     </tr>
                                                                 )
