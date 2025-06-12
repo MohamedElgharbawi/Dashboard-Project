@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useAdmin } from "../../Components/Context/UserProvider";
+import { useAdmin } from "../../../Components/Context/UserProvider";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
@@ -13,11 +13,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
-import CheckConnection from "../../Components/CheckConnection/CheckConnection";
+import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
 
 const Questions = () => {
 
-    // Edit & Add 
+    // http://localhost:5173/dashboard/courses/1/section/111/videos
 
     const { id, sectionId, videoId } = useParams();
     console.log(id, sectionId, videoId);
@@ -141,7 +141,7 @@ const Questions = () => {
                                         width: "100%",
                                         mt:1.2
                                     }}
-                                    onClick={() => navigate(-1)}
+                                    onClick={() => navigate(`/dashboard/courses/${id}/section/${sectionId}/videos`)}
                                     >
                                     Back
                                 </Button>
@@ -208,7 +208,7 @@ const Questions = () => {
                                                 width: "100%",
                                                 mt:1.2
                                             }}
-                                            onClick={() => navigate(-1)}
+                                            onClick={() => navigate(`/dashboard/courses/${id}/section/${sectionId}/videos`)}
                                             >
                                             Back
                                         </Button>
