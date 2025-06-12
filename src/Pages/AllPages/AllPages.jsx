@@ -17,4 +17,5 @@ import Courses from "../Courses Folder/Courses/Courses";
 import Home from "../Home/Home";
 import Questions from "../Questions/Questions";
 import EditQuesion from "../Edit Question/EditQuestion";
-export { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home, Questions, EditQuesion };
+import AddQuestion from "../AddQuestion/AddQuestion";
+export { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home, Questions, EditQuesion, AddQuestion };

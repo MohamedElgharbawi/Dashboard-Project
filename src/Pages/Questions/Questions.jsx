@@ -122,7 +122,7 @@ const Questions = () => {
                                     <span style={{ opacity: (page - 1 && page > 0) ? 1 : .3, pointerEvents: page - 1 ? "auto" : "none" }} onClick={() => {
                                         setPage(page - 1);
                                     }}><i className="fa-solid fa-arrow-left"></i></span>
-                                    <Link to={"/dashboard/courses/add"} style={{ flexGrow: "1" }}><Button variant="contained" color="primary" type="submit" sx={{ textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Question</Button></Link>
+                                    <Button onClick={() => navigate(`/dashboard/courses/${id}/section/${sectionId}/videos/${videoId}/questions/add`, {state:{pageNum:page}})} variant="contained" color="primary" type="submit" sx={{ flexGrow:1, textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Question</Button>
                                     <span style={{ opacity: page !== numPages && numPages ? 1 : .3, pointerEvents: page !== numPages ? "auto" : "none" }} onClick={() => {
                                         setPage(page + 1);
                                     }}><i className="fa-solid fa-arrow-right"></i></span>
@@ -189,7 +189,7 @@ const Questions = () => {
                                             <span style={{ opacity: page - 1 ? 1 : .3, pointerEvents: page - 1 ? "auto" : "none" }} onClick={() => {
                                                 setPage(page - 1);
                                             }}><i className="fa-solid fa-arrow-left"></i></span>
-                                            <Button onClick={() => navigate("/dashboard/courses/add", {state:{pageNum:page}})} variant="contained" color="primary" type="submit" sx={{ flexGrow: "1", textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Question</Button>
+                                            <Button onClick={() => navigate(`/dashboard/courses/${id}/section/${sectionId}/videos/${videoId}/questions/add`, {state:{pageNum:page}})} variant="contained" color="primary" type="submit" sx={{ flexGrow: "1", textTransform: "none", padding: "12px 30px", fontWeight: "bold", fontSize: "16px", borderRadius: "5px", boxShadow: "0px 4px 15px rgba(25, 118, 210, 0.3)", transition: "all 0.3s ease", ":hover": { backgroundColor: "#1565c0" }, width: "100%" }}>Add Question</Button>
                                             <span style={{ opacity: page !== numPages ? 1 : .3, pointerEvents: page !== numPages ? "auto" : "none" }} onClick={() => {
                                                 setPage(page + 1);
                                             }}><i className="fa-solid fa-arrow-right"></i></span>
