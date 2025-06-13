@@ -18,4 +18,5 @@ import Home from "../Home/Home";
 import Questions from "../Questions Folder/Questions/Questions";
 import EditQuesion from "../Questions Folder/EditQuestion/EditQuestion";
 import AddQuestion from "../Questions Folder/AddQuestion/AddQuestion";
-export { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home, Questions, EditQuesion, AddQuestion };
+import Quizzes from "../Quizzes/Quizzes";
+export { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home, Questions, EditQuesion, AddQuestion, Quizzes };

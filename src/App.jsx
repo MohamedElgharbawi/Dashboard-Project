@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter, Routes, Route  } from "react-router-dom";
-import { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home, Questions, EditQuesion, AddQuestion } from "./Pages/AllPages/AllPages";
+import { Login, AddCourse, NotFound, EditCourse, Orders, EditInstructor, GetSections, EditSection, AddSection, Videos, EditVideo, AddVideo, OrderDetails, Users, Instructors, Courses, Home, Questions, EditQuesion, AddQuestion, Quizzes } from "./Pages/AllPages/AllPages";
 import { ProtectedRoutes, UserProvider, Layout } from "./Components/AllComponent/AllComponent";
 
 const App = () => {
@@ -21,6 +21,7 @@ const App = () => {
                                 <Route path="instructors" element={<Instructors />}/>
                                 <Route path="users" element={<Users />} />
                                 <Route path="orders" element={<Orders />} />
+                                <Route path="quizzes" element={<Quizzes/>} />
                                 <Route path="courses/add" element={<AddCourse/>}/>
                                 <Route path="courses/edit/:id" element={<EditCourse/>}/>
                                 <Route path="courses/:id/sections" element={<GetSections />}/>

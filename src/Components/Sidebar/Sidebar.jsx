@@ -51,6 +51,11 @@ const Sidebar = () => {
                         <BsMenuButtonWideFill className="icon" /> Orders
                     </NavLink>
                 </li>
+                <li onClick={() => navigate("/dashboard/quizzes")} className={`sidebar-list-item ${isActive("/dashboard/quizzes") ? "active" : ""}`}>
+                    <NavLink to="/dashboard/quizzes">
+                        <i className="fas fa-pen-to-square"></i> Quizzes
+                    </NavLink>
+                </li>
             </ul>
         </aside>
     );
