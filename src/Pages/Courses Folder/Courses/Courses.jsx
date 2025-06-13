@@ -51,7 +51,7 @@ const Courses = () => {
     }
 
     useEffect(() => {
-            getCourses();
+        getCourses();
     }, [page]);
 
     const handleClickOpen = (id) => {
