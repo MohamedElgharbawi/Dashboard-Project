@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useAdmin } from "../../Components/Context/UserProvider";
 import axios from "axios";
@@ -21,10 +22,10 @@ const Quizzes = () => {
         }
     }
 
-    async function deleteQuiz() {
+    async function deleteQuiz(id) {
         try {
             const options = {
-                url: `https://brightminds.runasp.net/api/Quizzes/${quizId}`,
+                url: `https://brightminds.runasp.net/api/Quizzes/${id}`,
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,
