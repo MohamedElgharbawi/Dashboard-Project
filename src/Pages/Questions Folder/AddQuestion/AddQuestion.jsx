@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useAdmin } from "../../../Components/Context/UserProvider";
-import { Box, TextField, Button, FormControl, FormLabel} from "@mui/material";
+import { Box, TextField, Button, FormControl, FormLabel, InputLabel, Select, MenuItem } from "@mui/material";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
@@ -17,14 +17,19 @@ const AddQuestion = () => {
     const { pageNum } = location.state;
     const [questionDetails, setQuestionDetails] = useState({
         title: "",
-        option1:"",
-        option2:"",
-        option3:"",
+        type: "MCQ",
+        option1: "",
+        option2: "",
+        option3: "",
         option4: "",
         correctAnswer: "",
         attachment: "",
-        videoId:videoId,
+        videoId: videoId,
     });
+    const types = [
+        { id: 1, type: "MCQ" },
+        { id: 2, type: "Essay" },
+    ];
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -32,6 +37,7 @@ const AddQuestion = () => {
         try {
             const formData = new FormData();
             formData.append("Title", questionDetails.title);
+            formData.append("Type", questionDetails.type);
             formData.append("Option1", questionDetails.option1);
             formData.append("Option2", questionDetails.option2);
             formData.append("Option3", questionDetails.option3);
@@ -77,7 +83,7 @@ const AddQuestion = () => {
                 sx={{
                     width: { xs: "90%", sm: "400px" },
                     border: "1px solid #1976d2",
-                    padding: "25px 30px 15px",
+                    padding: "20px 30px 15px",
                     borderRadius: "10px",
                     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
                     background: "#fff"
@@ -88,63 +94,95 @@ const AddQuestion = () => {
                     fullWidth
                     name="title"
                     type="text"
-                    sx={{ mb: 2 }}
+                    sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}
                     value={questionDetails.title}
                     onChange={e => setQuestionDetails({ ...questionDetails, title: e.target.value })}
                 />
 
-                <TextField
-                    label="Option 1"
-                    fullWidth
-                    type="text"
-                    name="Option 1"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.option1}
-                    onChange={e => setQuestionDetails({ ...questionDetails, option1: e.target.value })}
-                />
-                
-                <TextField
-                    label="Option 2"
-                    fullWidth
-                    type="text"
-                    name="Option 2"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.option2}
-                    onChange={e => setQuestionDetails({ ...questionDetails, option2: e.target.value })}
-                />
+                <FormControl fullWidth sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}>
+                    <InputLabel id="type-label">Type</InputLabel>
+                    <Select
+                        MenuProps={{
+                            PaperProps: {
+                                style: {
+                                    maxHeight: 200,
+                                },
+                                className: "custom-scrollbar"
+                            },
+                        }}
+                        labelId="type-label"
+                        id="type"
+                        name="Type"
+                        value={questionDetails.type}
+                        label="Category"
+                        onChange={e => setQuestionDetails({ ...questionDetails, type: e.target.value })}
+                    >
+                        {types.map(item => (
+                            <MenuItem key={item.id} value={item.type}>
+                                {item.type}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                {
+                questionDetails.type === "MCQ" ? 
+                <>
+                    <TextField
+                        label="Option 1"
+                        fullWidth
+                        type="text"
+                        name="Option 1"
+                        sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}
+                        value={questionDetails.option1}
+                        onChange={e => setQuestionDetails({ ...questionDetails, option1: e.target.value })}
+                    />
                     
-                <TextField
-                    label="Option 3"
-                    fullWidth
-                    type="text"
-                    name="Option 3"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.option3}
-                    onChange={e => setQuestionDetails({ ...questionDetails, option3: e.target.value })}
-                />
-                    
-                <TextField
-                    label="Option 4"
-                    fullWidth
-                    type="text"
-                    name="Option 4"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.option4}
-                    onChange={e => setQuestionDetails({ ...questionDetails, option4: e.target.value })}
-                />
+                    <TextField
+                        label="Option 2"
+                        fullWidth
+                        type="text"
+                        name="Option 2"
+                        sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}
+                        value={questionDetails.option2}
+                        onChange={e => setQuestionDetails({ ...questionDetails, option2: e.target.value })}
+                    />
+                        
+                    <TextField
+                        label="Option 3"
+                        fullWidth
+                        type="text"
+                        name="Option 3"
+                        sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}
+                        value={questionDetails.option3}
+                        onChange={e => setQuestionDetails({ ...questionDetails, option3: e.target.value })}
+                    />
+                        
+                    <TextField
+                        label="Option 4"
+                        fullWidth
+                        type="text"
+                        name="Option 4"
+                        sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}
+                        value={questionDetails.option4}
+                        onChange={e => setQuestionDetails({ ...questionDetails, option4: e.target.value })}
+                    />
+                </>
+                    : null 
+                }
                     
                 <TextField
                     label="Correct Answer"
                     fullWidth
                     type="text"
                     name="correctAnswer"
-                    sx={{ mb: 2 }}
+                    sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}
                     value={questionDetails.correctAnswer}
                     onChange={e => setQuestionDetails({ ...questionDetails, correctAnswer: e.target.value })}
                 />
 
 
-                <FormControl fullWidth sx={{ mb: 2 }}>
+                <FormControl fullWidth sx={{ mb: questionDetails.type === "MCQ" ? 1 : 2 }}>
                     <FormLabel
                         sx={{
                             mb: 1,

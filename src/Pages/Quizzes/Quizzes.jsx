@@ -15,8 +15,8 @@ const Quizzes = () => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-            const data  = await axios.request(options);
-            console.log(data);
+            const { data }  = await axios.request(options);
+            console.log(data.data);
         } catch (e) {
             console.log(e);
         }

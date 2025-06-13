@@ -163,6 +163,7 @@ const Questions = () => {
                                                             <tr>
                                                                 <th>Question Image</th>
                                                                 <th>Question Number</th>
+                                                                <th>Type</th>
                                                                 <th>Edit</th>
                                                                 <th>Delete</th>
                                                             </tr>
@@ -172,7 +173,8 @@ const Questions = () => {
                                                                 return (
                                                                     <tr key={question.id}>
                                                                         <td><img src={question.attachmentUrl} alt={question.title}/></td>
-                                                                        <td>Question Number { (index + 1) + (page - 1) * 5 }</td>
+                                                                        <td>Question Number {(index + 1) + (page - 1) * 5}</td>
+                                                                        <td>{question.type === "MCQ" ? "MCQ" : "Essay"}</td>
                                                                         <td className="fontawesome-icon" onClick={() => { handleEdit(question.id) }}><i className="fa-solid fa-edit"></i></td>
                                                                         <td className="fontawesome-icon" onClick={() => handleClickOpen(question.id)}><i className="fa-solid fa-trash" ></i></td>
                                                                     </tr>
