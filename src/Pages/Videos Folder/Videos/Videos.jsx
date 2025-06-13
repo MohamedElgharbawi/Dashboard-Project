@@ -141,7 +141,7 @@ const Videos = () => {
                 minWidth: "120px",
                 width: "100%",
               }}
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(`/dashboard/courses/${id}/sections`)}
             >
               Back
             </Button>
@@ -168,7 +168,7 @@ const Videos = () => {
             <Button
               variant="contained"
               color="error"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(`/dashboard/courses/${id}/sections`)}
             >
               Back
             </Button>
