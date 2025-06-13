@@ -53,6 +53,7 @@ const Courses = () => {
     useEffect(() => {
         getCourses();
     }, [page]);
+    
 
     const handleClickOpen = (id) => {
         setOpen(true);
