@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAdmin } from "../../Components/Context/UserProvider";
 import axios from "axios";
 import { useEffect } from "react";
