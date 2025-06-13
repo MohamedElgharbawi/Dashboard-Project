@@ -21,6 +21,7 @@ const EditQuestion = () => {
     const pageNum = location.state?.pageNum;
     const [questionDetails, setQuestionDetails] = useState({
         title: "",
+        type:"",
         Option1:"", 
         Option2:"", 
         Option3:"", 
@@ -37,7 +38,7 @@ const EditQuestion = () => {
             const {data} = await axios.get(`https://brightminds.runasp.net/api/Questions/${questionId}`);
             const response = data.data;
             console.log(response);
-            setQuestionDetails({ ...questionDetails, title: response.title, Option1: response.option1, Option2: response.option2, Option3: response.option3, Option4: response.option4, correctAnswer: response.correctAnswer, attachment:response.attachmentUrl });
+            setQuestionDetails({ ...questionDetails, title: response.title, type:response.type, Option1: response.option1, Option2: response.option2, Option3: response.option3, Option4: response.option4, correctAnswer: response.correctAnswer, attachment:response.attachmentUrl });
         } catch (e) {
             console.log(e);
         } finally {
@@ -51,6 +52,7 @@ const EditQuestion = () => {
         try {
             const formData = new FormData();
             formData.append("Title", questionDetails.title);
+            formData.append("Type", questionDetails.type);
             formData.append("Attachment", questionDetails.attachment);
             formData.append("Option1", questionDetails.Option1);
             formData.append("Option2", questionDetails.Option2);
@@ -108,47 +110,50 @@ const EditQuestion = () => {
                     value={questionDetails.title}
                     onChange={e => setQuestionDetails({...questionDetails, title:e.target.value})}
                 />
-
-                <TextField
-                    label="Option 1"
-                    fullWidth
-                    type="text"
-                    name="Option 1"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.Option1}
-                    onChange={e => setQuestionDetails({...questionDetails, Option1:e.target.value})}
-                />
-                
-                <TextField
-                    label="Option 2"
-                    fullWidth
-                    type="text"
-                    name="Option 2"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.Option2}
-                    onChange={e => setQuestionDetails({...questionDetails, Option2:e.target.value})}
-                />
+                {questionDetails.type === "MCQ" ?
+                <>
+                    <TextField
+                        label="Option 1"
+                        fullWidth
+                        type="text"
+                        name="Option 1"
+                        sx={{ mb: 2 }}
+                        value={questionDetails.Option1}
+                        onChange={e => setQuestionDetails({...questionDetails, Option1:e.target.value})}
+                    />
                     
-                <TextField
-                    label="Option 3"
-                    fullWidth
-                    type="text"
-                    name="Option 3"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.Option3}
-                    onChange={e => setQuestionDetails({...questionDetails, Option3:e.target.value})}
-                />
-                    
-                <TextField
-                    label="Option 4"
-                    fullWidth
-                    type="text"
-                    name="Option 4"
-                    sx={{ mb: 2 }}
-                    value={questionDetails.Option4}
-                    onChange={e => setQuestionDetails({...questionDetails, Option4:e.target.value})}
-                />
-                    
+                    <TextField
+                        label="Option 2"
+                        fullWidth
+                        type="text"
+                        name="Option 2"
+                        sx={{ mb: 2 }}
+                        value={questionDetails.Option2}
+                        onChange={e => setQuestionDetails({...questionDetails, Option2:e.target.value})}
+                    />
+                        
+                    <TextField
+                        label="Option 3"
+                        fullWidth
+                        type="text"
+                        name="Option 3"
+                        sx={{ mb: 2 }}
+                        value={questionDetails.Option3}
+                        onChange={e => setQuestionDetails({...questionDetails, Option3:e.target.value})}
+                    />
+                        
+                    <TextField
+                        label="Option 4"
+                        fullWidth
+                        type="text"
+                        name="Option 4"
+                        sx={{ mb: 2 }}
+                        value={questionDetails.Option4}
+                        onChange={e => setQuestionDetails({...questionDetails, Option4:e.target.value})}
+                    />
+                </>
+                    : null
+                }
                 <TextField
                     label="Correct Answer"
                     fullWidth
