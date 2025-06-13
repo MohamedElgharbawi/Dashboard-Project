@@ -17,10 +17,7 @@ import CheckConnection from "../../../Components/CheckConnection/CheckConnection
 
 const Questions = () => {
 
-    // http://localhost:5173/dashboard/courses/1/section/111/videos
-
     const { id, sectionId, videoId } = useParams();
-    console.log(id, sectionId, videoId);
     const location = useLocation();
     const [questions, setQuestions] = useState([]);
     const { token } = useAdmin();
@@ -41,10 +38,11 @@ const Questions = () => {
     
     async function getQuestions() {
         try {
-            const { data } = await axios.get("https://brightminds.runasp.net/api/Questions");
+            const { data } = await axios.get(`https://brightminds.runasp.net/api/Questions?PageIndex=${page}&PageSize=${5}&VideoId=${videoId}`);
             setNumPages(Math.ceil(data.data.count / data.data.pageSize));
+            console.log(data);
             if (data.data.count)
-                await axios.get(`https://brightminds.runasp.net/api/Questions?PageIndex=${page}&PageSize=${data.data.pageSize}&VideoId=${211}`).then(response => response.data).then(data => setQuestions(data.data.items));
+                await axios.get(`https://brightminds.runasp.net/api/Questions?PageIndex=${page}&PageSize=${data.data.pageSize}&VideoId=${videoId}`).then(response => response.data).then(data => setQuestions(data.data.items));
         } catch (e) {
             console.log(e);
         } finally {
@@ -171,11 +169,10 @@ const Questions = () => {
                                                         </thead>
                                                         <tbody>
                                                         {questions.map((question, index) => {
-                                                            console.log(question);
                                                                 return (
                                                                     <tr key={question.id}>
                                                                         <td><img src={question.attachmentUrl} alt={question.title}/></td>
-                                                                        <td>Question Number { index + 1 }</td>
+                                                                        <td>Question Number { (index + 1) + (page - 1) * 5 }</td>
                                                                         <td className="fontawesome-icon" onClick={() => { handleEdit(question.id) }}><i className="fa-solid fa-edit"></i></td>
                                                                         <td className="fontawesome-icon" onClick={() => handleClickOpen(question.id)}><i className="fa-solid fa-trash" ></i></td>
                                                                     </tr>

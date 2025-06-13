@@ -163,7 +163,7 @@ const Courses = () => {
                                                             {courses.map((course, index) => {
                                                                 return (
                                                                     <tr key={course.id}>
-                                                                        <td>{index + 1}</td>
+                                                                        <td>{(index + 1) + (page - 1) * 5}</td>
                                                                         <td>{course.name}</td>
                                                                         <td>{course.instructorName}</td>
                                                                         <td><img src={course.pictureUrl} alt={course.course} /></td>

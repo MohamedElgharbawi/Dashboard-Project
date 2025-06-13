@@ -103,7 +103,7 @@ const Orders = () => {
 
                                                     return (
                                                         <tr key={order.id}>
-                                                            <td>{index + 1}</td>
+                                                            <td>{(index + 1) + (page - 1) * 5}</td>
                                                             <td>{order.userName}</td>
                                                             <td className={"font-semibold flex justify-center items-center"} style={{color: order.status.toLowerCase() === "paid" ? "green" : order.status.toLowerCase() === "unpaid" ? "red" : "auto"}}>
                                                                 {order.status}

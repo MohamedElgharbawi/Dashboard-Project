@@ -11,7 +11,7 @@ const Instructor = ({ instructor, index, handleEdit, handleClickOpen }) => {
     return (
         <>
             <tr key={instructor.userId}>
-                <td>{index + 1}</td>
+                <td>{index}</td>
                 <td>{instructor.displayName}</td>
                 <td>{instructor.jobTitle}</td>
                 <td><img src={instructor.imageCover} alt={instructor.jobTitle} /></td>

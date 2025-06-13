@@ -203,7 +203,7 @@ const Users = () => {
                                     {users.map((user, index) => {
                                         return (
                                             <tr key={user.id}>
-                                                <td>{index + 1}</td>
+                                                <td>{(index + 1) + (page - 1) * 5}</td>
                                                 <td>{user.displayName}</td>
                                                 <td>{user.email}</td>
                                                 <td>{user.roles[0] ?? "user"}</td>

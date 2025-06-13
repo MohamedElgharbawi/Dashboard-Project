@@ -144,7 +144,7 @@ const Instructors = () => {
                                     </thead>
                                     <tbody>
                                         {instructors.map((instructor, index) => {
-                                            return <Instructor key={instructor.userId} instructor={instructor} index={index} handleEdit={handleEdit} handleClickOpen={handleClickOpen} />
+                                            return <Instructor key={instructor.userId} instructor={instructor} index={(index + 1) + (page - 1) * 5} handleEdit={handleEdit} handleClickOpen={handleClickOpen} />
                                         })}
                                     </tbody>
                                 </table>
