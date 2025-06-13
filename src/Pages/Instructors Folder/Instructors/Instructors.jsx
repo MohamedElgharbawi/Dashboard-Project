@@ -56,8 +56,9 @@ const Instructors = () => {
             setLoading(false);
         } catch (e) {
             console.log(e);
+        } finally {
+            setShow(true);
         }
-        setShow(true);
     }
 
     useEffect(() => {
@@ -94,7 +95,9 @@ const Instructors = () => {
             console.log(e);
             toast.error("Instructor Deletion Is Not Allowed.");
         }
-        handleClose();
+        finally {
+            handleClose();
+        }
     }
 
     async function handleEdit(id) {

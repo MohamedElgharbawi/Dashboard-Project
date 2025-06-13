@@ -49,8 +49,8 @@ const Questions = () => {
             console.log(e);
         } finally {
             setLoading(false);
+            setShow(true);
         }
-        setShow(true);
     }
 
     useEffect(() => {
@@ -98,8 +98,9 @@ const Questions = () => {
             if (e.response.data.statusCode === 403) {
                 toast.error("Question Deletion Is Not Allowed.");
             }
+        } finally {
+            handleClose();
         }
-        handleClose();
     }
 
     async function handleEdit(questionId) {

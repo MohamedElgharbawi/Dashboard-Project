@@ -63,7 +63,6 @@ const EditInstructor = () => {
         } finally {
             setLoading(false);
         }
-        
     }
     
     return (

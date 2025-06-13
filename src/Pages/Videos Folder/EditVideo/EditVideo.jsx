@@ -12,7 +12,6 @@ const EditVideo = () => {
     const navigate = useNavigate();
     const { token } = useAdmin();
     const { sectionId, videoId } = useParams();
-
     const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [videoDetail, setVideoDetail] = useState({
@@ -28,7 +27,6 @@ const EditVideo = () => {
     useEffect(() => { getVideoData() }, [token]);
 
     async function getVideoData() {
-
         try {
             const options = {
                 method:"GET",
@@ -75,7 +73,6 @@ const EditVideo = () => {
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
-        
         try {
             const formData = new FormData();
             formData.append("Name", videoDetail.name);

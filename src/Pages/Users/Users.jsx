@@ -58,8 +58,8 @@ const Users = () => {
             toast.error("You Must Enter Valid Values.");
         } finally {
             setLoading(false);
+            setShow(false);
         }
-        setShow(false);
     }
 
 

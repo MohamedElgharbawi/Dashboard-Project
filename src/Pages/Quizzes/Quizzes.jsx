@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useAdmin } from "../../Components/Context/UserProvider";
+import { useAdmin } from "../../../Components/Context/UserProvider";
 import CircularProgress from '@mui/material/CircularProgress';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Button from '@mui/material/Button';
@@ -13,7 +13,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
-import CheckConnection from "../../Components/CheckConnection/CheckConnection";
+import CheckConnection from "../../../Components/CheckConnection/CheckConnection";
 // import Skeleton from '@mui/material/Skeleton';
 
 const Quizzes = () => {
@@ -36,7 +36,7 @@ const Quizzes = () => {
     }
     }, []);
     
-    async function getQuizzes() {
+    async function getCourses() {
         try {
             const { data } = await axios.get("https://brightminds.runasp.net/api/Course");
             setNumPages(Math.ceil(data.data.count / data.data.pageSize));
@@ -51,7 +51,7 @@ const Quizzes = () => {
     }
 
     useEffect(() => {
-        getQuizzes();
+        getCourses();
     }, [page]);
     
 
@@ -115,13 +115,13 @@ const Quizzes = () => {
     return (
         <CheckConnection>
             <Helmet>
-                <title>Quizzes</title>
+                <title>Courses</title>
             </Helmet>
                     {
                         !courses.length && show ?
                             <div>
-                                <h1 className="text-white text-3xl font-extrabold text-center">Quizzes</h1>
-                                <h2 className="text-center text-white font-bold" style={{ fontSize: "28px", marginBlock: "25px" }}>No Quizzes Founded</h2>
+                                <h1 className="text-white text-3xl font-extrabold text-center">Courses</h1>
+                                <h2 className="text-center text-white font-bold" style={{ fontSize: "28px", marginBlock: "25px" }}>No Courses Founded</h2>
                                 <div className="pagination">
                                     <span style={{ opacity: (page - 1 && page > 0) ? 1 : .3, pointerEvents: page - 1 ? "auto" : "none" }} onClick={() => {
                                         setPage(page - 1);
@@ -193,7 +193,7 @@ const Quizzes = () => {
                                 )}
                                 <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
                                     <DialogTitle id="alert-dialog-title">
-                                        {"Are You Sure You Want To Delete This Quiz ?"}
+                                        {"Are You Sure You Want To Delete This Course ?"}
                                     </DialogTitle>
                                     <DialogContent>
                                         <DialogContentText id="alert-dialog-description">

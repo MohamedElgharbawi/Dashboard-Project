@@ -46,8 +46,8 @@ const Courses = () => {
             console.log(e);
         } finally {
             setLoading(false);
+            setShow(true);
         }
-        setShow(true);
     }
 
     useEffect(() => {
